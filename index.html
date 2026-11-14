@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopMaster - Tienda Virtual</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Estilos Personalizados -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#"><i class="fa-solid fa-cart-shopping me-2"></i>ShopMaster</a>
+            <button class="btn btn-outline-light position-relative" data-bs-toggle="modal" data-bs-target="#cartModal">
+                <i class="fa-solid fa-basket-shopping"></i> Carrito
+                <span id="cartCount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="bg-light py-5 text-center border-bottom mb-4">
+        <div class="container">
+            <h1 class="display-5 fw-bold text-dark">Bienvenido a ShopMaster 🛍️</h1>
+            <p class="lead text-muted">Descubre los mejores productos con calidad garantizada y pagos seguros.</p>
+        </div>
+    </header>
+
+    <!-- Catálogo de Productos -->
+    <main class="container mb-5">
+        <div id="productContainer" class="row g-4">
+            <!-- Los productos se cargarán dinámicamente aquí mediante JavaScript -->
+            <div class="text-center py-5">
+                <div class="spinner-border text-primary" role="status"></div>
+                <p class="mt-2 text-muted">Cargando productos...</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal de Detalles del Producto -->
+    <div class="modal fade" id="productModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="modalTitle">Detalles del Producto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="modalImage" src="" alt="Producto" class="img-fluid mb-3" style="max-height: 250px; object-fit: contain;">
+                    <p class="text-muted small text-uppercase" id="modalCategory"></p>
+                    <p id="modalDescription" class="text-secondary small"></p>
+                    <h4 class="text-success fw-bold mb-3" id="modalPrice"></h4>
+                    <div class="d-flex justify-content-center align-items-center gap-3">
+                        <input type="number" id="modalQuantity" class="form-control text-center" value="1" min="1" style="width: 80px;">
+                        <button class="btn btn-success fw-bold" id="addToCartBtn"><i class="fa-solid fa-cart-plus me-1"></i> Agregar al carrito 🛒</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal del Carrito de Compras -->
+    <div class="modal fade" id="cartModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title"><i class="fa-solid fa-cart-shopping me-2"></i> Tu Carrito de Compras</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="cartItemsList" class="table-responsive">
+                        <!-- Elementos del carrito -->
+                    </div>
+                    <div class="text-end mt-3">
+                        <h4 class="fw-bold">Total: $<span id="cartTotalPrice">0.00</span></h4>
+                    </div>
+                    <hr>
+                    <!-- Pasarela de Pago Simulada -->
+                    <h5 class="fw-bold text-secondary mb-3"><i class="fa-solid fa-credit-card me-2"></i> Pasarela de Pago 💳</h5>
+                    <form id="checkoutForm">
+                        <div class="mb-3">
+                            <label class="form-label small text-muted">Nombre completo</label>
+                            <input type="text" class="form-control" id="payName" placeholder="Ej. Juan Pérez" required>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label small text-muted">Número de tarjeta</label>
+                                <input type="text" class="form-control" id="payCard" placeholder="4532 8901 2345 8899" maxlength="19" required>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label small text-muted">Vencimiento</label>
+                                <input type="text" class="form-control" id="payExp" placeholder="MM/AA" maxlength="5" required>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label class="form-label small text-muted">CVV</label>
+                                <input type="password" class="form-control" id="payCvv" placeholder="123" maxlength="4" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100 fw-bold py-2"><i class="fa-solid fa-check me-2"></i> Pagar ahora y generar Ticket ✅</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-4">
+        <div class="container">
+            <p class="mb-0">&copy; 2026 ShopMaster. Todos los derechos reservados. Desarrollado con IA y JavaScript.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- jsPDF Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- Script Personalizado -->
+    <script src="script.js"></script>
+</body>
+
+</html>

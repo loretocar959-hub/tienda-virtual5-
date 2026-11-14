@@ -1,0 +1,21 @@
+body {
+    font-family: 'Roboto', 'Open Sans', sans-serif;
+    background-color: #FFFFFF;
+    color: #343A40;
+}
+
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+    height: 200px;
+    object-fit: contain;
+    padding: 15px;
+}
